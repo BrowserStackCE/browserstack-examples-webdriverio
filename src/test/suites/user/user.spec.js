@@ -1,7 +1,4 @@
-const _ = require('lodash');
-const expectChai = require('chai').expect;
-
-describe('StackDemo login', () => {
+describe('StackDemo user suite', () => {
 
   beforeEach('Open StackDemo', () => {
     browser.url('');
@@ -11,20 +8,39 @@ describe('StackDemo login', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('locked account should see error message', () => {
-    $('#signin').click();
-    $('#username input').setValue('locked_user\n');
-    $('#password input').setValue('testingisfun99\n');
-    $('#login-btn').click();
-    expect($('.api-error')).toHaveText('Your account has been locked.');
-  })
-
-  it('valid account should see username', () => {
+  it('account with favourites should see 5 items', () => {
     $('#signin').click();
     $('#username input').setValue('fav_user\n');
     $('#password input').setValue('testingisfun99\n');
     $('#login-btn').click();
-    expect($('.username')).toHaveText('fav_user');
+
+    $('#favourites').click();
+
+    browser.waitUntil(() => {
+      let pageUrl = browser.getUrl();
+      return pageUrl.indexOf('favourites') > -1
+    }, 5000)
+
+    expect($$('.shelf-item')).toHaveLength(5);
+  })
+
+  it('logged in user should be able to add favourite', () => {
+    $('#signin').click();
+    $('#username input').setValue('existing_orders_user\n');
+    $('#password input').setValue('testingisfun99\n');
+    $('#login-btn').click();
+
+    $("//p[text() = 'iPhone 12']/../div/button").waitForDisplayed({ timeout: 5000 });
+    $("//p[text() = 'iPhone 12']/../div/button").click();
+
+    $('#favourites').click();
+
+    browser.waitUntil(() => {
+      let pageUrl = browser.getUrl();
+      return pageUrl.indexOf('favourites') > -1
+    }, 5000)
+    browser.pause(5000)
+    expect($$('p.shelf-item__title')).toHaveTextContaining('iPhone 12');
   })
 
   it('Login with user for which images doesnt load', () => {
@@ -41,14 +57,6 @@ describe('StackDemo login', () => {
     expectChai(_.every(all_images,  function (value) {
       return (_.isEqual(value,'') )
     })).to.equal(true, "All images are not broken");
-  })
-
-  it('invalid password should see error message', () => {
-    $('#signin').click();
-    $('#username input').setValue('fav_user\n');
-    $('#password input').setValue('wrongpass\n');
-    $('#login-btn').click();
-    expect($('.api-error')).toHaveText('Invalid Password');
   })
 
   it('Login with user having existing orders', () => {

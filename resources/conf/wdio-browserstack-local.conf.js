@@ -6,7 +6,7 @@ var overrides = {
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
   specs: [
-    './test/specs/local/orders-local.spec.js'
+    './src/test/suites/e2e/e2e.spec.js'
   ],
   capabilities: [{
     maxInstances: 1,
@@ -40,6 +40,9 @@ var overrides = {
         resolve();
       });
     });
+  },
+  beforeEach: function () {
+    browser.url('http://localhost:3000/');
   },
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if(passed) {

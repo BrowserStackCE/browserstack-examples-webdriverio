@@ -3,7 +3,7 @@ var _ = require("lodash");
 
 var overrides = {
   specs: [
-    './test/specs/plain/**/login*.js'
+    './src/test/suites/e2e/e2e.spec.js'
   ],
   services: ['docker'],
   dockerOptions: {

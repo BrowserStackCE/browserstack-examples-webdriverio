@@ -3,11 +3,8 @@ var _ = require("lodash");
 
 var overrides = {
   specs: [
-    './test/specs/plain/*.js'
+    './src/test/suites/e2e/e2e.spec.js'
   ],
-  capabilities: [{
-    maxInstances: 5
-  }],
 };
 
 exports.config = _.defaultsDeep(overrides, defaults.config);

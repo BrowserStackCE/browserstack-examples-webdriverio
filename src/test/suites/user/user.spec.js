@@ -1,3 +1,6 @@
+const _ = require('lodash');
+const expectChai = require('chai').expect;
+
 describe('StackDemo user suite', () => {
 
   beforeEach('Open StackDemo', () => {
@@ -10,8 +13,8 @@ describe('StackDemo user suite', () => {
 
   it('account with favourites should see 5 items', () => {
     $('#signin').click();
-    $('#username input').setValue('fav_user\n');
-    $('#password input').setValue('testingisfun99\n');
+    $('#username input').setValue(testData[0].split(',')[0] + '\n');
+    $('#password input').setValue(testData[0].split(',')[1] + '\n');
     $('#login-btn').click();
 
     $('#favourites').click();
@@ -26,8 +29,8 @@ describe('StackDemo user suite', () => {
 
   it('logged in user should be able to add favourite', () => {
     $('#signin').click();
-    $('#username input').setValue('existing_orders_user\n');
-    $('#password input').setValue('testingisfun99\n');
+    $('#username input').setValue(testData[2].split(',')[0] + '\n');
+    $('#password input').setValue(testData[2].split(',')[1] + '\n');
     $('#login-btn').click();
 
     $("//p[text() = 'iPhone 12']/../div/button").waitForDisplayed({ timeout: 5000 });
@@ -45,8 +48,8 @@ describe('StackDemo user suite', () => {
 
   it('Login with user for which images doesnt load', () => {
     $('#signin').click();
-    $('#username input').setValue('image_not_loading_user\n');
-    $('#password input').setValue('testingisfun99\n');
+    $('#username input').setValue(testData[1].split(',')[0] + '\n');
+    $('#password input').setValue(testData[1].split(',')[1] + '\n');
     $('#login-btn').click();
     expect($('.username')).toHaveText('image_not_loading_user');
 
@@ -61,8 +64,8 @@ describe('StackDemo user suite', () => {
 
   it('Login with user having existing orders', () => {
     $('#signin').click();
-    $('#username input').setValue('existing_orders_user\n');
-    $('#password input').setValue('testingisfun99\n');
+    $('#username input').setValue(testData[2].split(',')[0] + '\n');
+    $('#password input').setValue(testData[2].split(',')[1] + '\n');
     $('#login-btn').click();
     expect($('.username')).toHaveText('existing_orders_user');
 

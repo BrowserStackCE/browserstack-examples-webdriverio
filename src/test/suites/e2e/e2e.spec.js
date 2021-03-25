@@ -1,9 +1,8 @@
-const HomePage = require('../../pageobjects/homePage');
-const SignInPage = require('../../pageobjects/signInPage');
-const CheckoutPage = require('../../pageobjects/checkoutPage');
-const ConfirmationPage = require('../../pageobjects/confirmationPage');
-const checkoutPage = require('../../pageobjects/checkoutPage');
-const OrdersPage = require('../../pageobjects/ordersPage');
+const HomePage = require('../../../app/pages/homePage');
+const SignInPage = require('../../../app/pages/signInPage');
+const CheckoutPage = require('../../../app/pages/checkoutPage');
+const ConfirmationPage = require('../../../app/pages/confirmationPage');
+const OrdersPage = require('../../../app/pages/ordersPage');
 
 describe('Order a product', () => {
 
@@ -18,7 +17,7 @@ describe('Order a product', () => {
   it('Login and order a product', () => {
     HomePage.navigateToSignIn();
 
-    SignInPage.login('fav_user\n', 'testingisfun99\n');
+    SignInPage.login(testData[0].split(',')[0] + '\n', testData[0].split(',')[1] + '\n');
     expect(SignInPage.getSignedInUsername()).toHaveText('fav_user');
 
     HomePage.selectPhone('iPhone XS');

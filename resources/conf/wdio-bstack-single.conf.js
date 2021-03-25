@@ -1,5 +1,4 @@
 var defaults = require("./wdio.conf.js");
-var browserstack = require('browserstack-local');
 var _ = require("lodash");
 
 var overrides = {
@@ -8,42 +7,21 @@ var overrides = {
   specs: [
     './src/test/suites/e2e/e2e.spec.js'
   ],
+  host: 'hub.browserstack.com',
+  maskCommands: 'setValues, getValues, setCookies, getCookies',
   capabilities: [{
     maxInstances: 1,
     'browserstack.debug': true,
     'browserstack.video': true,
-    'browserstack.local': true,
+    'browserstack.networkLogs': true,
     os: "OS X",
     os_version: "Catalina",
     browserName: 'Chrome',
     browser_version: "latest",
     acceptInsecureCerts: true,
-    name: 'local_test',
-    build: 'webdriverio-browserstack'
+    name: 'BStack-Test',
+    build: 'BStack Build webdriverio single'
   }],
-  onPrepare: function (config, capabilities) {
-    console.log("Connecting local");
-    return new Promise(function (resolve, reject) {
-      exports.bs_local = new browserstack.Local();
-      exports.bs_local.start({ 'key': exports.config.key }, function (error) {
-        if (error) return reject(error);
-
-        console.log('Connected. Now testing...');
-        resolve();
-      });
-    });
-  },
-  onComplete: function (capabilties, specs) {
-    return new Promise(function(resolve, reject){
-      exports.bs_local.stop(function() {
-        console.log("Binary stopped");
-        resolve();
-      });
-    });
-  },
-  beforeEach: function () {
-    browser.url('http://localhost:3000/');
-  },
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if(passed) {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
@@ -52,7 +30,6 @@ var overrides = {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}');
     }
   }
-}
-
+};
 
 exports.config = _.defaultsDeep(overrides, defaults.config);

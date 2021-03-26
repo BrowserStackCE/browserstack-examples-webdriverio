@@ -42,7 +42,7 @@ The WebDriverIO tests are run on different platforms like on-prem, docker and Br
 
 ## Test infrastructure environments 
 
-- [On-premise/self-hosted](#on-premise-self-hosted)
+- [On-premise/self-hosted](#on-premise-/-self-hosted)
 - [Docker](#docker)
 - [BrowserStack](#browserstack)
 
@@ -53,17 +53,23 @@ The WebDriverIO tests are run on different platforms like on-prem, docker and Br
 
   - Docker
 
-    ./resources/conf/wdio-docker-parallel.conf.js
+    `./resources/conf/wdio-docker-parallel.conf.js`
+
+    ```js
     capabilities: [{
     maxInstances: 5,
     ...
+    ```
   
   - BrowserStack
     
-    ./resources/conf/wdio-bstack-parallel.conf.js
+    `./resources/conf/wdio-bstack-parallel.conf.js`
+
+    ```js
     commonCapabilities: [{
     maxInstances: 5,
     ...
+    ```
 
 ## Test Reporting
 
@@ -210,16 +216,16 @@ In this section, we will run a single test on Chrome browser on Browserstack. To
   ```
 
 - How to custom build and session names?
-When you run test on BrowserStack it creates a build and session under which you can see your results. In this framework, if you want to add some custome name for build and session you can do like below:
+  - When you run test on BrowserStack it creates a build and session under which you can see your results. In this framework, if you want to add some custome name for build and session you can do like below:
 
   - Set build name by setting env varaibale:
-    For \*nix based and Mac machines:
+    - For \*nix based and Mac machines:
 
     ```sh
     export BROWSERSTACK_BUILD_NAME=<browserstack_build_name>
     ```
 
-      - For Windows:
+    - For Windows:
 
     ```shell
     set BROWSERSTACK_BUILD_NAME=<browserstack_build_name>

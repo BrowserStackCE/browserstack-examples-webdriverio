@@ -19,8 +19,9 @@ var overrides = {
     browserName: 'Chrome',
     browser_version: "latest",
     acceptInsecureCerts: true,
-    name: 'BStack-Test',
-    build: 'BStack Build webdriverio single'
+    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || (((require('minimist')(process.argv.slice(2)))['_'])[0].split('/').reverse())[0] +
+          " - " + new Date().toISOString(),
+    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().toISOString()
   }],
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if(passed) {

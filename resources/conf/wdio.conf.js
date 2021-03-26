@@ -32,7 +32,7 @@ exports.config = {
     ui: 'bdd',
     timeout: 60000
   },
-  beforeSession: function (config, capabilities, specs) {
+  beforeSession: function (config, capabilities) {
     console.log('Reqading CSV file')
     return new Promise((resolve) => {
         setTimeout(() => {

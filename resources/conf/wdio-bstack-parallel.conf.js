@@ -25,8 +25,9 @@ var overrides = {
     os_version: "Catalina",
     browserName: 'Chrome',
     browser_version: "latest",
-    name: 'parallel_test',
-    build: 'webdriverio-browserstack',
+    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || (((require('minimist')(process.argv.slice(2)))['_'])[0].split('/').reverse())[0] +
+          " - " + new Date().toISOString(),
+    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().toISOString()
   }],
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if(passed) {

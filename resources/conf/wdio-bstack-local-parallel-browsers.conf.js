@@ -3,7 +3,7 @@ var browserstack = require('browserstack-local');
 var _ = require("lodash");
 
 const currentDateTime = new Date()
-const timeStamp = currentDateTime.getDay().toString() + currentDateTime.getMonth().toString() + currentDateTime.getFullYear().toString() + 
+const timeStamp = currentDateTime.getDate().toString() + currentDateTime.getMonth().toString() + currentDateTime.getFullYear().toString() + 
         currentDateTime.getHours().toString() + currentDateTime.getMinutes().toString() + currentDateTime.getSeconds().toString() +
         currentDateTime.getMilliseconds().toString()
 
@@ -19,34 +19,38 @@ var overrides = {
   ],
   host: 'hub.browserstack.com',
   maskCommands: 'setValues, getValues, setCookies, getCookies',
+  baseUrl: 'http://localhost:3000/',
+  commonCapabilities: {
+    'browserstack.debug': true,
+    'browserstack.video': true,
+    'browserstack.networkLogs': true,
+    'browserstack.local': true,
+    acceptInsecureCerts: true,
+    "browserstack.localIdentifier": timeStamp,
+    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || (((require('minimist')(process.argv.slice(2)))['_'])[0].split('/').reverse())[0] +
+    " - " + new Date().toISOString(),
+    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().toISOString()
+  },
   capabilities: [{
     os: "OS X",
     os_version: "Catalina",
     browserName: 'Chrome',
     browser_version: "latest",
-    name: 'parallel_test',
-    build: 'webdriverio-browserstack',
   },{
     device: "Samsung Galaxy S20",
     os_version: "10.0",
     real_mobile: "true",
     browserName: 'Android',
-    name: 'parallel_test',
-    build: 'webdriverio-browserstack',
   },{
     os: "Windows",
     os_version: "10",
     browserName: 'Chrome',
     browser_version: "latest",
-    name: 'parallel_test',
-    build: 'webdriverio-browserstack',
   },{
     device: "iPhone 12",
     os_version: "14",
     real_mobile: "true",
     browserName: 'iPhone',
-    name: 'parallel_test',
-    build: 'webdriverio-browserstack',
   }],
   onPrepare: function (config, capabilities) {
     console.log("Connecting local");
@@ -68,9 +72,6 @@ var overrides = {
       });
     });
   },
-  beforeEach: function () {
-    browser.url('http://localhost:3000/');
-  },
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if(passed) {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
@@ -81,5 +82,8 @@ var overrides = {
   }
 }
 
-
 exports.config = _.defaultsDeep(overrides, defaults.config);
+
+exports.config.capabilities.forEach(function(caps){
+  for(var i in exports.config.commonCapabilities) caps[i] = caps[i] || exports.config.commonCapabilities[i];
+});

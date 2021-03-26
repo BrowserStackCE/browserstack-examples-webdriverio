@@ -3,7 +3,7 @@ var browserstack = require('browserstack-local');
 var _ = require("lodash");
 
 const currentDateTime = new Date()
-const timeStamp = currentDateTime.getDay().toString() + currentDateTime.getMonth().toString() + currentDateTime.getFullYear().toString() + 
+const timeStamp = currentDateTime.getDate().toString() + currentDateTime.getMonth().toString() + currentDateTime.getFullYear().toString() + 
         currentDateTime.getHours().toString() + currentDateTime.getMinutes().toString() + currentDateTime.getSeconds().toString() +
         currentDateTime.getMilliseconds().toString()
 
@@ -14,6 +14,7 @@ var overrides = {
     './src/test/suites/e2e/e2e.spec.js'
   ],
   host: 'hub.browserstack.com',
+  baseUrl: 'http://localhost:3000/',
   maskCommands: 'setValues, getValues, setCookies, getCookies',
   capabilities: [{
     maxInstances: 1,
@@ -27,8 +28,9 @@ var overrides = {
     browserName: 'Chrome',
     browser_version: "latest",
     acceptInsecureCerts: true,
-    name: 'local_test',
-    build: 'webdriverio-browserstack'
+    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || (((require('minimist')(process.argv.slice(2)))['_'])[0].split('/').reverse())[0] +
+          " - " + new Date().toISOString(),
+    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().toISOString()
   }],
   onPrepare: function (config, capabilities) {
     console.log("Connecting local");
@@ -50,9 +52,6 @@ var overrides = {
       });
     });
   },
-  beforeEach: function () {
-    browser.url('http://localhost:3000/');
-  },
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if(passed) {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
@@ -62,6 +61,5 @@ var overrides = {
     }
   }
 }
-
 
 exports.config = _.defaultsDeep(overrides, defaults.config);

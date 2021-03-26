@@ -8,9 +8,9 @@ var overrides = {
     './src/test/suites/e2e/e2e.spec.js'
   ],
   host: 'hub.browserstack.com',
-  maskCommands: 'setValues, getValues, setCookies, getCookies',
   capabilities: [{
     maxInstances: 1,
+    'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
     'browserstack.debug': true,
     'browserstack.video': true,
     'browserstack.networkLogs': true,

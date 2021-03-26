@@ -33,7 +33,7 @@ exports.config = {
     timeout: 60000
   },
   beforeSession: function (config, capabilities) {
-    console.log('Reqading CSV file')
+    console.log('Reading CSV file')
     return new Promise((resolve) => {
         setTimeout(() => {
             fs.readFile('./resources/data/user.csv', 'utf8', function(err, fileContents) {

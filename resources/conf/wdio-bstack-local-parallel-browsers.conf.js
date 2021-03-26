@@ -18,9 +18,10 @@ var overrides = {
     './src/test/suites/user/*.js'
   ],
   host: 'hub.browserstack.com',
-  maskCommands: 'setValues, getValues, setCookies, getCookies',
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: 'http://bs-local:3000/',
   commonCapabilities: {
+    maxInstances: 5,
+    'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
     'browserstack.debug': true,
     'browserstack.video': true,
     'browserstack.networkLogs': true,

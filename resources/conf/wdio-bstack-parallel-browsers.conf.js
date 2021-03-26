@@ -11,10 +11,10 @@ var overrides = {
     './src/test/suites/e2e/*.js',
     './src/test/suites/user/*.js'
   ],
-  maxInstances: 5,
-  maskCommands: 'setValues, getValues, setCookies, getCookies',
   host: 'hub.browserstack.com',
   commonCapabilities: {
+    maxInstances: 5,
+    'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
     'browserstack.debug': true,
     'browserstack.video': true,
     'browserstack.networkLogs': true,

@@ -17,7 +17,6 @@ var overrides = {
     './src/test/suites/e2e/*.js',
     './src/test/suites/user/*.js'
   ],
-  maxInstances: 5,
   host: 'hub.browserstack.com',
   baseUrl: 'http://localhost:3000/',
   maskCommands: 'setValues, getValues, setCookies, getCookies',
@@ -30,7 +29,8 @@ var overrides = {
     "browserstack.localIdentifier": timeStamp,
   },
   capabilities: [{
-    maxInstances: 1,
+    maxInstances: 5,
+    'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
     'browserstack.debug': true,
     'browserstack.video': true,
     os: "OS X",

@@ -42,7 +42,7 @@ The WebDriverIO tests are run on different platforms like on-prem, docker and Br
 
 ## Test infrastructure environments 
 
-- [On-premise/self-hosted](#on-premise-/-self-hosted)
+- [On-premise/self-hosted](#on-premise--self-hosted)
 - [Docker](#docker)
 - [BrowserStack](#browserstack)
 

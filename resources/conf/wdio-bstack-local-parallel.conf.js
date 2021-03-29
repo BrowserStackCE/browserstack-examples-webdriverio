@@ -2,10 +2,7 @@ var defaults = require("./wdio.conf.js");
 var browserstack = require('browserstack-local');
 var _ = require("lodash");
 
-const currentDateTime = new Date()
-const timeStamp = currentDateTime.getDate().toString() + currentDateTime.getMonth().toString() + currentDateTime.getFullYear().toString() + 
-        currentDateTime.getHours().toString() + currentDateTime.getMinutes().toString() + currentDateTime.getSeconds().toString() +
-        currentDateTime.getMilliseconds().toString()
+timeStamp = new Date().getTime();
 
 var overrides = {
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
@@ -38,9 +35,8 @@ var overrides = {
     browserName: 'Chrome',
     browser_version: "latest",
     acceptInsecureCerts: true,
-    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || (((require('minimist')(process.argv.slice(2)))['_'])[0].split('/').reverse())[0] +
-          " - " + new Date().toISOString(),
-    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().toISOString()
+    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().getTime()
   }],
   onPrepare: function (config, capabilities) {
     console.log("Connecting local");
@@ -63,6 +59,14 @@ var overrides = {
     });
   },
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
+    if((require('minimist')(process.argv.slice(2)))['bstack-session-name']) {
+      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" +
+        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] + " - " + new Date().getTime() + "\" }}");
+    } else {
+      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +
+        " - " + new Date().getTime() +  "\" }}");
+    }
+
     if(passed) {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
     } else {

@@ -11,21 +11,6 @@ describe('StackDemo filters', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('Lowest to Highest filter is applied', () => {
-    $('.sort select').selectByAttribute('value', 'lowestprice');
-    browser.waitUntil(
-      () => $("//*[@class = 'shelf-item__title'][1]").getText() === 'Pixel 2',
-      {
-          timeout: 5000,
-          timeoutMsg: 'expected filtering to happen within 5s'
-      }
-    );
-    all_prices = $$(".val > b").map(function(element){
-      return parseInt(element.getText())
-    });
-    expectChai(_.isEqual(all_prices, _.orderBy(all_prices, [], ['asc']))).to.equal(true, "Lowest to Highest filter is not applied");
-  })
-
   it('Apply vendor filter', () => {
     $("//span[contains(text(), 'Apple')]").click();
     $("//span[contains(text(), 'Samsung')]").click();

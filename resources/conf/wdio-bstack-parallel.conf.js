@@ -13,7 +13,6 @@ var overrides = {
   ],
   host: 'hub.browserstack.com',
   commonCapabilities: {
-    maxInstances: 5,
     'browserstack.debug': true,
     'browserstack.video': true,
     'browserstack.networkLogs': true,
@@ -21,15 +20,23 @@ var overrides = {
     'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies'
   },
   capabilities: [{
+    maxInstances: 5,
     os: "OS X",
     os_version: "Catalina",
     browserName: 'Chrome',
     browser_version: "latest",
-    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || (((require('minimist')(process.argv.slice(2)))['_'])[0].split('/').reverse())[0] +
-          " - " + new Date().toISOString(),
-    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().toISOString()
+    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().getTime()
   }],
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
+    if((require('minimist')(process.argv.slice(2)))['bstack-session-name']) {
+      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" +
+        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] + " - " + new Date().getTime() + "\" }}");
+    } else {
+      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +
+        " - " + new Date().getTime() +  "\" }}");
+    }
+
     if(passed) {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
     } else {
@@ -40,3 +47,7 @@ var overrides = {
 };
 
 exports.config = _.defaultsDeep(overrides, defaults.config);
+
+exports.config.capabilities.forEach(function(caps){
+  for(var i in exports.config.commonCapabilities) caps[i] = caps[i] || exports.config.commonCapabilities[i];
+});

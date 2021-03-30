@@ -15,7 +15,7 @@ var overrides = {
     './src/test/suites/user/*.js'
   ],
   host: 'hub.browserstack.com',
-  baseUrl: 'http://bs-local:3000/',
+  baseUrl: 'http://localhost:3000/',
   commonCapabilities: {
     maxInstances: 5,
     'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
@@ -43,11 +43,6 @@ var overrides = {
     os_version: "10",
     browserName: 'Chrome',
     browser_version: "latest",
-  },{
-    device: "iPhone 12",
-    os_version: "14",
-    real_mobile: "true",
-    browserName: 'iPhone',
   }],
   onPrepare: function (config, capabilities) {
     console.log("Connecting local");

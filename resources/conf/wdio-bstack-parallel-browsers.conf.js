@@ -13,7 +13,7 @@ var overrides = {
   ],
   host: 'hub.browserstack.com',
   commonCapabilities: {
-    maxInstances: 5,
+    maxInstances: 1,
     'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
     'browserstack.debug': true,
     'browserstack.video': true,

@@ -13,8 +13,8 @@ describe('StackDemo user suite', () => {
 
   it('Login with user having existing orders', () => {
     $('#signin').click();
-    $('#username input').setValue(testData[2].split(',')[0] + '\n');
-    $('#password input').setValue(testData[2].split(',')[1] + '\n');
+    $('#username input').setValue(browser.config.accounts[3].username + '\n');
+    $('#password input').setValue(browser.config.accounts[3].password + '\n');
     $('#login-btn').click();
     expect($('.username')).toHaveText('existing_orders_user');
 

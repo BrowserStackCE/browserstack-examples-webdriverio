@@ -12,8 +12,8 @@ describe('StackDemo filters', () => {
   })
 
   it('Apply vendor filter', () => {
-    $("//span[contains(text(), 'Apple')]").click();
-    $("//span[contains(text(), 'Samsung')]").click();
+    $("input[value='Apple'] + span").click();
+    $("input[value='Samsung'] + span").click();
     browser.pause(5000)                                               // Example for static wait
     all_phones = $$(".shelf-item__title").map(function(element){
       return element.getText()

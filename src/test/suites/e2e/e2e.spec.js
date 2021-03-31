@@ -16,9 +16,8 @@ describe('Order a product', () => {
 
   it('Login and order a product', () => {
     HomePage.navigateToSignIn();
-
-    SignInPage.login(testData[0].split(',')[0] + '\n', testData[0].split(',')[1] + '\n');
-    expect(SignInPage.getSignedInUsername()).toHaveText('fav_user');
+    SignInPage.login(browser.config.accounts[0].username, browser.config.accounts[0].password);
+    expect(SignInPage.getSignedInUsername()).toHaveText(browser.config.accounts[0].username);
 
     HomePage.selectPhone('iPhone XS');
     HomePage.closeCartModal();

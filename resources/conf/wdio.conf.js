@@ -1,6 +1,8 @@
 var fs = require('fs');
+const accounts = require('../data/user.json')
 
 exports.config = {
+  accounts: accounts,
   runner: 'local',
   specs: [
     ''
@@ -33,17 +35,6 @@ exports.config = {
     timeout: 60000
   },
   beforeSession: function (config, capabilities) {
-    console.log('Reading CSV file')
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            fs.readFile('./resources/data/user.csv', 'utf8', function(err, fileContents) {
-              if (err) throw err;
-              testData = fileContents.split('\r\n')
-              testData.shift()
-            });
-            resolve()
-        }, 5000)
-    })
   },
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if (error) {

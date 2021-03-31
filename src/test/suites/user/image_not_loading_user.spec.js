@@ -13,8 +13,8 @@ describe('StackDemo user suite', () => {
 
   it('All product images should load for user', () => {
     $('#signin').click();
-    $('#username input').setValue(testData[1].split(',')[0] + '\n');
-    $('#password input').setValue(testData[1].split(',')[1] + '\n');
+    $('#username input').setValue(browser.config.accounts[2].username + '\n');
+    $('#password input').setValue(browser.config.accounts[2].password + '\n');
     $('#login-btn').click();
     expect($('.username')).toHaveText('image_not_loading_user');
 
@@ -23,7 +23,7 @@ describe('StackDemo user suite', () => {
     });
 
     expectChai(_.every(all_images,  function (value) {
-      return (!_.isEqual(value,'') )
+      return (_.isEqual(value,'') )
     })).to.equal(true, "All images are not loaded");
   })
 })

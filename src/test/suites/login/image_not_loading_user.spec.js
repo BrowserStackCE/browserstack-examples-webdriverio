@@ -11,13 +11,13 @@ describe('StackDemo login', () => {
       browser.execute(() => sessionStorage.clear())
     })
 
-    it(`Login sholud be successful for account with username 'image_not_loading_user'`, function() {
+    it(`Login should be successful for account with username 'image_not_loading_user'`, function() {
         $('#signin').click();
-        $('#username input').setValue(testData[1].split(',')[0] + '\n');
-        $('#password input').setValue(testData[1].split(',')[1] + '\n');
+        $('#username input').setValue(browser.config.accounts[2].username + '\n');
+        $('#password input').setValue(browser.config.accounts[2].password + '\n');
         $('#login-btn').click();
 
-        expect($('.username')).toHaveText(testData[1].split(',')[0]);
+        expect($('.username')).toHaveText(browser.config.accounts[2].username);
         $('#logout').click();
     });
 })

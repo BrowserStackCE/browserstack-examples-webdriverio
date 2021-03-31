@@ -24,8 +24,8 @@ class SignInPage extends Page {
   }
 
   login(username, password) {
-    this.inputUsername.setValue(username);
-    this.inputPassword.setValue(password);
+    this.inputUsername.setValue(username + '\n');
+    this.inputPassword.setValue(password + '\n');
     this.btnSubmit.click();
   }
 

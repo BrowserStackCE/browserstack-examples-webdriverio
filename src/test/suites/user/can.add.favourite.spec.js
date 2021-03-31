@@ -13,8 +13,8 @@ describe('StackDemo user suite', () => {
 
   it('Logged in user should be able to add favourite', () => {
     $('#signin').click();
-    $('#username input').setValue(testData[2].split(',')[0] + '\n');
-    $('#password input').setValue(testData[2].split(',')[1] + '\n');
+    $('#username input').setValue(browser.config.accounts[3].username + '\n');
+    $('#password input').setValue(browser.config.accounts[3].password + '\n');
     $('#login-btn').click();
 
     $("//p[text() = 'iPhone 12']/../div/button").waitForDisplayed({ timeout: 5000 });

@@ -13,8 +13,8 @@ describe('StackDemo user suite', () => {
 
   it('User with favourites should see 5 items', () => {
     $('#signin').click();
-    $('#username input').setValue(testData[0].split(',')[0] + '\n');
-    $('#password input').setValue(testData[0].split(',')[1] + '\n');
+    $('#username input').setValue(browser.config.accounts[0].username + '\n');
+    $('#password input').setValue(browser.config.accounts[0].password + '\n');
     $('#login-btn').click();
 
     $('#favourites').click();

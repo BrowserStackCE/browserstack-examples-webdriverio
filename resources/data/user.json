@@ -1,0 +1,18 @@
+[
+  {
+    "username": "fav_user",
+    "password": "testingisfun99"
+  },
+  {
+    "username": "locked_user",
+    "password": "testingisfun99"
+  },
+  {
+    "username": "image_not_loading_user",
+    "password": "testingisfun99"
+  },
+  {
+    "username": "existing_orders_user",
+    "password": "testingisfun99"
+  }
+]

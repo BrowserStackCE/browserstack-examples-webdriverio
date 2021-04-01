@@ -23,13 +23,11 @@ var overrides = {
     build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().getTime()
   }],
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
-    console.log('name: ' + (require('minimist')(process.argv.slice(2)))['bstack-session-name'])
     if((require('minimist')(process.argv.slice(2)))['bstack-session-name']) {
       browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" +
-        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] + " - " + new Date().getTime() + "\" }}");
+        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] +  "\" }}");
     } else {
-      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +
-        " - " + new Date().getTime() +  "\" }}");
+      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +  "\" }}");
     }
 
     if(passed) {

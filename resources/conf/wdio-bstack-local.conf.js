@@ -52,10 +52,9 @@ var overrides = {
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if((require('minimist')(process.argv.slice(2)))['bstack-session-name']) {
       browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" +
-        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] + " - " + new Date().getTime() + "\" }}");
+        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] +  "\" }}");
     } else {
-      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +
-        " - " + new Date().getTime() +  "\" }}");
+      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +  "\" }}");
     }
 
     if(passed) {

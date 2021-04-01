@@ -12,6 +12,7 @@ var overrides = {
   ],
   host: 'hub.browserstack.com',
   baseUrl: 'http://localhost:3000/',
+  waitforTimeout: 50000,
   capabilities: [{
     maxInstances: 1,
     'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',

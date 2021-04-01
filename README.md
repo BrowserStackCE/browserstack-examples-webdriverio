@@ -1,6 +1,6 @@
 ![Logo](https://www.browserstack.com/images/static/header-logo.jpg)
 
-# BrowserStack Examples WendriverIO <a href="https://webdriver.io/"><img src="https://avatars.githubusercontent.com/u/72550141?s=48&v=4" alt="WebdriverIO" height="22" /></a> <a href="https://nodejs.org/en/"><img src="https://brandslogos.com/wp-content/uploads/images/large/nodejs-icon-logo.png" alt="nodejs" height="22" /></a> <a href="https://mochajs.org/"><img src="https://brandslogos.com/wp-content/uploads/images/large/mocha-logo.png" alt="mochs" height="22" /></a>
+# BrowserStack Examples Wendriverio <a href="https://webdriver.io/"><img src="https://avatars.githubusercontent.com/u/72550141?s=48&v=4" alt="WebdriverIO" height="22" /></a> <a href="https://nodejs.org/en/"><img src="https://brandslogos.com/wp-content/uploads/images/large/nodejs-icon-logo.png" alt="nodejs" height="22" /></a> <a href="https://mochajs.org/"><img src="https://brandslogos.com/wp-content/uploads/images/large/mocha-logo.png" alt="mochs" height="22" /></a>
 
 ## Introduction
 
@@ -15,6 +15,9 @@ The WebDriverIO tests are run on different platforms like on-prem, docker and Br
 ## Repository setup
 
 - Clone the repository
+
+- Ensure you have the following dependencies installed on the machine
+  - NodeJS >= 14.16.0 (includes npm 6.14.11)
 
 - Run below command to configure dependencies
 
@@ -90,7 +93,7 @@ This infrastructure points to running the tests on your own machine using a brow
   To run the default test scenario (e.g. End to End Scenario) on your own machine, use the following command:
   
   ```sh
-  npm run test
+  npm test
   ```
 
   To run a specific test scenario, use the following command with the script names from package.json:

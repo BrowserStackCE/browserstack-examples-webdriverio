@@ -23,7 +23,7 @@ describe('StackDemo user suite', () => {
     });
 
     expectChai(_.every(all_images,  function (value) {
-      return (_.isEqual(value,'') )
+      return (!_.isEqual(value,'') )
     })).to.equal(true, "All images are not loaded");
   })
 })

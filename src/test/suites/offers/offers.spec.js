@@ -14,10 +14,9 @@ describe('StackDemo Offers', () => {
     $('#password input').setValue(browser.config.accounts[0].password + '\n');
     $('#login-btn').click();
 
-    // browser.setGeoLocation({latitude: 1, longitude: 103, altitude: 0});
     browser.execute(function() {
       window.navigator.geolocation.getCurrentPosition = function(success) {
-        var position = { coords : { latitude: "40.748440", longitude: "-73.984559" } }; 
+        var position = { coords : { latitude: "1", longitude: "103" } }; 
         success(position);
       }
     });

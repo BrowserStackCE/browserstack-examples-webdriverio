@@ -14,6 +14,7 @@
     "docker-parallel": "npx wdio resources/conf/wdio-docker-parallel.conf.js",
     "on-prem-suite": "npx wdio resources/conf/wdio-on-prem-suite.conf.js",
     "on-prem": "npx wdio resources/conf/wdio-on-prem.conf.js",
+    "on-prem-suite-parallel": "npx wdio resources/conf/wdio-on-prem-suite-parallel.conf.js",
     "test": "npx wdio resources/conf/wdio-on-prem.conf.js",
     "generate-report": "./node_modules/allure-commandline/bin/allure generate allure-results --clean && ./node_modules/allure-commandline/bin/allure open"
   },

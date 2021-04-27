@@ -10,8 +10,8 @@
     "bstack-parallel-browsers": "npx wdio resources/conf/wdio-bstack-parallel-browsers.conf.js",
     "bstack-parallel": "npx wdio resources/conf/wdio-bstack-parallel.conf.js",
     "bstack-single": "npx wdio resources/conf/wdio-bstack-single.conf.js",
-    "docker": "npx wdio resources/conf/wdio-docker.conf.js",
-    "docker-parallel": "npx wdio resources/conf/wdio-docker-parallel.conf.js",
+    "docker": "npx wdio resources/conf/wdio-docker-service.conf.js",
+    "docker-parallel": "npx wdio resources/conf/wdio-docker-service-parallel.conf.js",
     "on-prem-suite": "npx wdio resources/conf/wdio-on-prem-suite.conf.js",
     "on-prem": "npx wdio resources/conf/wdio-on-prem.conf.js",
     "on-prem-suite-parallel": "npx wdio resources/conf/wdio-on-prem-suite-parallel.conf.js",
@@ -22,20 +22,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webdriverio": "7.2.2",
     "@rpii/wdio-html-reporter": "^6.3.1",
     "@wdio/allure-reporter": "^7.0.1",
-    "browserstack-local": "1.4.8",
     "@wdio/cli": "^6.12.0",
     "@wdio/local-runner": "^6.12.0",
     "@wdio/mocha-framework": "^6.11.0",
     "@wdio/spec-reporter": "^6.11.0",
     "@wdio/sync": "^6.11.0",
     "allure-commandline": "^2.13.8",
+    "browserstack-local": "1.4.8",
+    "chai": "4.3.3",
     "chromedriver": "^87.0.7",
+    "lodash": "4.17.21",
     "wdio-chromedriver-service": "^6.0.4",
     "wdio-docker-service": "^3.1.0",
-    "lodash": "4.17.21",
-    "chai": "4.3.3"
+    "webdriverio": "7.2.2"
   }
 }

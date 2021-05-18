@@ -128,7 +128,20 @@ This infrastructure points to running the tests on your own machine using a brow
 
   This run profile executes the entire test suite sequentially on a single browser, on your own machine.
 
+### Run the entire test suite on your own machine in parallel
+
+- How to run the test?
+
+  To run the entire test suite on your own machine in parallel, use the following command:
   
+  ```sh
+  npm run on-prem-suite-parallel
+  ```
+
+- Output
+
+  This run profile executes the entire test suite parallelly by opening multiple browser instances on your own machine.
+
 ---
 
 # Docker
@@ -359,11 +372,3 @@ In this section, we will run the test cases to test the internally hosted websit
 - [Using Automate REST API](https://www.browserstack.com/automate/rest-api) to access information about your tests via the command-line interface
 - Understand how many parallel sessions you need by using our [Parallel Test Calculator](https://www.browserstack.com/automate/parallel-calculator?ref=github)
 - For testing public web applications behind IP restriction, [Inbound IP Whitelisting](https://www.browserstack.com/local-testing/inbound-ip-whitelisting) can be enabled with the [BrowserStack Enterprise](https://www.browserstack.com/enterprise) offering
-
-## Observations
-
- <Placeholder section for any other technical or general observations specific to the repository. If none, please remove the section>
-
- ## Open Issues
-
- <Placeholder section for any known open issues (some test known to not work or is flaky). If none, please remove the section>

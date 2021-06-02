@@ -52,21 +52,25 @@ node {
                     user = user.substring(0, user.lastIndexOf('-'))
                 }
                 withEnv(['BROWSERSTACK_USERNAME=' + user]) {
+                    dir('test') {
                     sh label: '', returnStatus: true, script: '''#!/bin/bash -l
                                                                 npm install
                                                                 npm run ${TEST_TYPE}
                                                                 '''
+                    }
                 }
             }
         }
 
         stage('Generate Reports') {
             browserStackReportPublisher 'automate'
-            sh label: '', returnStatus: true, script: '''#!/bin/bash -l
+            dir('test') {
+                sh label: '', returnStatus: true, script: '''#!/bin/bash -l
                                                                 cd test
                                                                 npm run generateMochawesome
                                                                 '''
-            archiveArtifacts artifacts: 'mochawesome-report/**/*.*', caseSensitive: false, defaultExcludes: false, onlyIfSuccessful: true
+                archiveArtifacts artifacts: 'mochawesome-report/**/*.*', caseSensitive: false, defaultExcludes: false, onlyIfSuccessful: true
+            }
         }
     } catch (e) {
         currentBuild.result = 'FAILURE'

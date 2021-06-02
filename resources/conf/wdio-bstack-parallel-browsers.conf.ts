@@ -14,7 +14,7 @@ const overrides = {
   ],
   host: 'hub.browserstack.com',
   commonCapabilities: {
-    maxInstances: 1,
+    maxInstances: 5,
     'browserstack.maskCommands': 'setValues, getValues, setCookies, getCookies',
     'browserstack.debug': true,
     'browserstack.video': true,

@@ -1,3 +1,4 @@
+import * as mergeResults from 'wdio-mochawesome-reporter/mergeResults'
 export const config = {
 
   autoCompileOpts: {
@@ -36,11 +37,24 @@ export const config = {
     }
   },
   framework: 'mocha',
-  reporters: [['allure', {
-    outputDir: 'allure-results',
-    disableWebdriverStepsReporting: true,
-    disableWebdriverScreenshotsReporting: false,
-  }]],
+  reporters: [[
+    'allure', {
+      outputDir: 'allure-results',
+      disableWebdriverStepsReporting: true,
+      disableWebdriverScreenshotsReporting: false,
+    }],
+  ['mochawesome', {
+    outputDir: './mocha-report',
+    outputFileFormat: function(opts: { cid: unknown; capabilities: unknown; }): string { 
+      return `results-${opts.cid}.json`
+  }
+
+  }]
+  ],
+  mochawesomeOpts: {
+    includeScreenshots: true,
+    screenshotUseRelativePath: true
+  },
   mochaOpts: {
     ui: 'bdd',
     timeout: 60000
@@ -49,5 +63,9 @@ export const config = {
     if (error) {
       browser.takeScreenshot();
     }
-  }
+  },
+  // Located in your wdio.conf.js file
+onComplete: function (): void {
+  mergeResults('./mocha-report', "results-*")
+}
 }

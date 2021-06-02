@@ -16,7 +16,8 @@
     "on-prem": "npx wdio resources/conf/wdio-on-prem.conf.ts",
     "on-prem-suite-parallel": "npx wdio resources/conf/wdio-on-prem-suite-parallel.conf.ts",
     "test": "npx wdio resources/conf/wdio-on-prem.conf.ts",
-    "generate-report": "./node_modules/allure-commandline/bin/allure generate allure-results --clean && ./node_modules/allure-commandline/bin/allure open",
+    "generate-allure-report": "./node_modules/allure-commandline/bin/allure generate allure-results --clean && ./node_modules/allure-commandline/bin/allure open",
+    "generateMochawesome": "marge mocha-report/wdio-ma-merged.json --reportTitle 'BrowserStack Examples WebdriverIO TypeScript Results'",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],
@@ -45,6 +46,10 @@
     "typescript": "^4.3.2",
     "wdio-chromedriver-service": "^7.1.0",
     "wdio-docker-service": "^3.1.0",
+    "wdio-mochawesome-reporter": "^4.0.0",
     "webdriverio": "7.2.2"
+  },
+  "dependencies": {
+    "mochawesome-report-generator": "3.1.5"
   }
 }

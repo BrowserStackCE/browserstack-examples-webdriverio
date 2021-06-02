@@ -5,3 +5,5 @@ allure-results/
 local.log
 .DS_Store
 .tsbuild/
+mocha-report/
+mochawesome-report

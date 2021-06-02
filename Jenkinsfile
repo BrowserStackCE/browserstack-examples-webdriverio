@@ -53,7 +53,6 @@ node {
                 }
                 withEnv(['BROWSERSTACK_USERNAME=' + user]) {
                     sh label: '', returnStatus: true, script: '''#!/bin/bash -l
-                                                                cd test
                                                                 npm install
                                                                 npm run ${TEST_TYPE}
                                                                 '''

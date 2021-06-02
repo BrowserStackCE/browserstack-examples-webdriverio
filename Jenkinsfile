@@ -55,7 +55,6 @@ node {
                     sh label: '', returnStatus: true, script: '''#!/bin/bash -l
                                                                 npm install
                                                                 npm run ${TEST_TYPE}
-                                                                npm run generateMochawesome
                                                                 '''
                 }
             }

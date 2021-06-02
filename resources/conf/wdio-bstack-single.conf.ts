@@ -23,7 +23,7 @@ const overrides = {
     name: (parseArgs(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
     build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().getTime()
   }],
-  afterTest: function (test: { title: string; }, context: Record<string, unknown>, { passed }: Record<string, unknown>) {
+  afterTest: function (test: { title: string; }, context: Record<string, unknown>, { passed, error }: Record<string, unknown>) {
     if ((parseArgs(process.argv.slice(2)))['bstack-session-name']) {
       browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" +
         (parseArgs(process.argv.slice(2)))['bstack-session-name'] + "\" }}");
@@ -35,7 +35,7 @@ const overrides = {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
     } else {
       browser.takeScreenshot();
-      browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}');
+      browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed. ' + error + '"}}');
     }
   }
 };

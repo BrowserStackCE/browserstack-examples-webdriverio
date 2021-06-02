@@ -22,6 +22,6 @@ describe('StackDemo user suite', () => {
       return element.getAttribute("src")
     });
 
-    expect(all_images.filter(x => x === '').length).to.equal(all_images.length);
+    expect(all_images.filter(x => x === '').length).to.equal(0, 'One or more images for this user has not loaded.');
   })
 })

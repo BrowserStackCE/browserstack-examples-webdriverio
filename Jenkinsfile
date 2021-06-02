@@ -53,9 +53,9 @@ node {
                 }
                 withEnv(['BROWSERSTACK_USERNAME=' + user]) {
                     sh label: '', returnStatus: true, script: '''#!/bin/bash -l
-                                                                cd test
                                                                 npm install
                                                                 npm run ${TEST_TYPE}
+                                                                npm run generateMochawesome
                                                                 '''
                 }
             }
@@ -63,6 +63,10 @@ node {
 
         stage('Generate Reports') {
             browserStackReportPublisher 'automate'
+            sh label: '', returnStatus: true, script: '''#!/bin/bash -l
+                                                                npm run generateMochawesome
+                                                                '''
+            archiveArtifacts artifacts: 'mochawesome-report/**/*.*', caseSensitive: false, defaultExcludes: false, onlyIfSuccessful: true
         }
     } catch (e) {
         currentBuild.result = 'FAILURE'

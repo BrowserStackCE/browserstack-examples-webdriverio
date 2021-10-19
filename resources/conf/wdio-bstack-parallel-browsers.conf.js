@@ -2,6 +2,7 @@ var defaults = require("./wdio.conf.js");
 var _ = require("lodash");
 
 var overrides = {
+  onBrowserstack: true,
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
   specs: [
@@ -9,7 +10,8 @@ var overrides = {
     './src/test/suites/offers/*.js',
     './src/test/suites/product/*.js',
     './src/test/suites/e2e/*.js',
-    './src/test/suites/user/*.js'
+    './src/test/suites/user/*.js',
+    './src/test/suites/accessibility/*.js'
   ],
   hostname: 'hub.browserstack.com',
   commonCapabilities: {

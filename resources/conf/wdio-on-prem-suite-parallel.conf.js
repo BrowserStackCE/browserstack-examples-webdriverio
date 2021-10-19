@@ -8,7 +8,8 @@ var overrides = {
     './src/test/suites/offers/*.js',
     './src/test/suites/product/*.js',
     './src/test/suites/e2e/*.js',
-    './src/test/suites/user/*.js'
+    './src/test/suites/user/*.js',
+    './src/test/suites/accessibility/*.js'
   ],
   capabilities: [{
     maxInstances: 5

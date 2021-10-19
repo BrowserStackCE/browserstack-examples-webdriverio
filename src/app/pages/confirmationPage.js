@@ -14,12 +14,26 @@ class ConfirmationPage extends Page {
     return $('div.continueButtonContainer button')
   }
 
+  get downloadPDFLink() {
+    return $('#downloadpdf');
+  }
+
   clickContinueShoppingButton() {
     this.continueShoppingButton.click();
   }
 
   waitForConfirmationToBeDisplayed() {
     this.confirmationMessage.waitForDisplayed({ timeout: 5000 });
+  }
+
+  clickDownloadPdf() {
+    this.downloadPDFLink.click();
+  }
+
+  downloadedFileExists(browser, fileName) {
+    browser.pause(2000);
+    const fileExists = browser.executeScript('browserstack_executor: {"action": "fileExists", "arguments": {"fileName": "'+ fileName + '"}}');
+    expect(fileExists).toEqual(true);
   }
 
 }

@@ -5,6 +5,7 @@ var _ = require("lodash");
 timeStamp = new Date().getTime();
 
 var overrides = {
+  onBrowserstack: true,
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
   specs: [

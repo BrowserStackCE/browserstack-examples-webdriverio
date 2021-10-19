@@ -33,6 +33,10 @@ describe('Order a product', () => {
 
     ConfirmationPage.waitForConfirmationToBeDisplayed();
     expect(ConfirmationPage.confirmationMessage).toHaveText('Your Order has been successfully placed.');
+    if(browser.config.onBrowserstack){
+      ConfirmationPage.clickDownloadPdf();
+      ConfirmationPage.downloadedFileExists(browser, 'confirmation.pdf');
+    }
     ConfirmationPage.clickContinueShoppingButton();
     
     HomePage.navigateToOrders();

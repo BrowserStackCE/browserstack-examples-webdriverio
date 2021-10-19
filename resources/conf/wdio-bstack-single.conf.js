@@ -2,6 +2,7 @@ var defaults = require("./wdio.conf.js");
 var _ = require("lodash");
 
 var overrides = {
+  onBrowserstack: true,
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
   specs: [

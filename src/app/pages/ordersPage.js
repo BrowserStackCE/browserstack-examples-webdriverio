@@ -15,8 +15,8 @@ class OrdersPage extends Page {
     return $('.order')
   }
 
-  waitforOrdersToDisplay() {
-    this.firstOrder.waitForDisplayed({ timeout: 5000 });
+  async waitforOrdersToDisplay() {
+    await (await this.firstOrder).waitForDisplayed({ timeout: 5000 });
   }
 }
 

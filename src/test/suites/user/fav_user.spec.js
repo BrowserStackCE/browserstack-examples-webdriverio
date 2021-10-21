@@ -11,19 +11,19 @@ describe('StackDemo user suite', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('User with favourites should see 5 items', () => {
-    $('#signin').click();
-    $('#username input').setValue(browser.config.accounts[0].username + '\n');
-    $('#password input').setValue(browser.config.accounts[0].password + '\n');
-    $('#login-btn').click();
+  it('User with favourites should see 5 items', async () => {
+    await (await $('#signin')).click();
+    await (await $('#username input')).setValue(browser.config.accounts[0].username + '\n');
+    await (await $('#password input')).setValue(browser.config.accounts[0].password + '\n');
+    await (await $('#login-btn')).click();
 
-    $('#favourites').click();
+    await (await $('#favourites')).click();
 
-    browser.waitUntil(() => {
-      let pageUrl = browser.getUrl();
-      return pageUrl.indexOf('favourites') > -1
+    await browser.waitUntil(async () => {
+      let pageUrl = await browser.getUrl();
+      return await pageUrl.indexOf('favourites') > -1
     }, 5000)
 
-    expect($$('.shelf-item')).toHaveLength(5);
+    expect((await $$('.shelf-item'))).toHaveLength(5);
   })
 })

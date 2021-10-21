@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const expectChai = require('chai').expect;
 
 describe('StackDemo user suite', () => {
@@ -11,19 +10,19 @@ describe('StackDemo user suite', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('All product images should load for user', () => {
-    $('#signin').click();
-    $('#username input').setValue(browser.config.accounts[2].username + '\n');
-    $('#password input').setValue(browser.config.accounts[2].password + '\n');
-    $('#login-btn').click();
-    expect($('.username')).toHaveText('image_not_loading_user');
+  it('All product images should load for user', async () => {
+    await (await $('#signin')).click();
+    await (await $('#username input')).setValue(browser.config.accounts[2].username + '\n');
+    await (await $('#password input')).setValue(browser.config.accounts[2].password + '\n');
+    await (await $('#login-btn')).click();
+    expect(await (await $('.username'))).toHaveText('image_not_loading_user');
 
-    all_images = $$("div.shelf-item__thumb img").map(function(element){
-      return element.getAttribute("src")
+    all_images = await (await $$("div.shelf-item__thumb img")).map(async function(element){
+      return (await (await element).getAttribute("src"));
     });
-
-    expectChai(_.every(all_images,  function (value) {
-      return (!_.isEqual(value,'') )
-    })).to.equal(true, "All images are not loaded");
+    for (let value of all_images.values()){
+      const image_name = await value;
+      expectChai(!image_name.isEqual('')).to.equal(true, "All images are not loaded");
+    }
   })
 })

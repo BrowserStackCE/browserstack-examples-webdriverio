@@ -14,12 +14,12 @@ class ConfirmationPage extends Page {
     return $('div.continueButtonContainer button')
   }
 
-  clickContinueShoppingButton() {
-    this.continueShoppingButton.click();
+  async clickContinueShoppingButton() {
+    await (await this.continueShoppingButton).click();
   }
 
-  waitForConfirmationToBeDisplayed() {
-    this.confirmationMessage.waitForDisplayed({ timeout: 5000 });
+  async waitForConfirmationToBeDisplayed() {
+    await (await this.confirmationMessage).waitForDisplayed({ timeout: 5000 });
   }
 
 }

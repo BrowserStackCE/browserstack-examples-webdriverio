@@ -14,30 +14,30 @@ describe('Order a product', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('Login and order a product', () => {
-    HomePage.navigateToSignIn();
-    SignInPage.login(browser.config.accounts[0].username, browser.config.accounts[0].password);
-    expect(SignInPage.getSignedInUsername()).toHaveText(browser.config.accounts[0].username);
+  it('Login and order a product', async () => {
+    await HomePage.navigateToSignIn();
+    await SignInPage.login(browser.config.accounts[0].username, browser.config.accounts[0].password);
+    expect(await SignInPage.getSignedInUsername()).toHaveText(browser.config.accounts[0].username);
 
-    HomePage.selectPhone('iPhone XS');
-    HomePage.closeCartModal();
-    HomePage.selectPhone('Galaxy S20');
-    HomePage.clickBuyButton();
+    await HomePage.selectPhone('iPhone XS');
+    await HomePage.closeCartModal();
+    await HomePage.selectPhone('Galaxy S20');
+    await HomePage.clickBuyButton();
 
-    CheckoutPage.enterFirstName('firstname');
-    CheckoutPage.enterLastName('lastname');
-    CheckoutPage.enterAddressLine1('address');
-    CheckoutPage.enterProvince('state');
-    CheckoutPage.enterPostCode('12345');
-    CheckoutPage.clickSubmit();
+    await CheckoutPage.enterFirstName('firstname');
+    await CheckoutPage.enterLastName('lastname');
+    await CheckoutPage.enterAddressLine1('address');
+    await CheckoutPage.enterProvince('state');
+    await CheckoutPage.enterPostCode('12345');
+    await CheckoutPage.clickSubmit();
 
-    ConfirmationPage.waitForConfirmationToBeDisplayed();
-    expect(ConfirmationPage.confirmationMessage).toHaveText('Your Order has been successfully placed.');
-    ConfirmationPage.clickContinueShoppingButton();
+    await ConfirmationPage.waitForConfirmationToBeDisplayed();
+    expect(await ConfirmationPage.confirmationMessage).toHaveText('Your Order has been successfully placed.');
+    await ConfirmationPage.clickContinueShoppingButton();
     
-    HomePage.navigateToOrders();
-    OrdersPage.waitforOrdersToDisplay();
-    expect(OrdersPage.allOrders).toHaveLength(1);
+    await HomePage.navigateToOrders();
+    await OrdersPage.waitforOrdersToDisplay();
+    expect(await OrdersPage.allOrders).toHaveLength(1);
   })
 })
 

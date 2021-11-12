@@ -1,5 +1,6 @@
 const AxeBuilder = require('@axe-core/webdriverio').default;
 const expectChai = require('chai').expect;
+
 describe('Accessibility test', () => {
 
   beforeEach('Open StackDemo', () => {
@@ -11,7 +12,9 @@ describe('Accessibility test', () => {
   })
 
   it('Performs accessibility tests', async() => {
-    const builder = new AxeBuilder({ client: browser });
+    await (await $('#signin')).click();
+    await (await $('.login_wrapper')).waitForDisplayed({ timeout: 3000 });
+    const builder = new AxeBuilder({ client: browser }).withRules('color-contrast');
     
     //const builder = new AxeBuilder({ client: browser }).withRules([])
     // this can be used to run the accessibility tests using a specific set of accessibility rules
@@ -19,7 +22,8 @@ describe('Accessibility test', () => {
     // this can be used to run the accessibility tests on a specific tag instead of full page
     
     const results = await builder.analyze();
-    violations = results.violations;
-    expectChai(violations.length).to.equal(8); //There are 8 accessibility violations in the demo website.
+    const violations = JSON.stringify(results.violations, null, 1);
+    console.log(violations);
+    expectChai(violations).to.be.empty();
   });
 });

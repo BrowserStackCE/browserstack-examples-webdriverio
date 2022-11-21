@@ -11,7 +11,18 @@ var overrides = {
   specs: [
     './src/test/suites/e2e/e2e.spec.js'
   ],
-  hostname: 'hub.browserstack.com',
+  services: [
+    [
+      'browserstack',
+      {
+        browserstackLocal: true,
+        opts: {
+          forcelocal: false,
+          localIdentifier: timeStamp,
+        }
+      },
+    ],
+  ],
   baseUrl: 'http://localhost:3000/',
   waitforTimeout: 50000,
   capabilities: [{
@@ -19,7 +30,6 @@ var overrides = {
     'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
     'browserstack.debug': true,
     'browserstack.video': true,
-    'browserstack.local': true,
     'browserstack.networkLogs': true,
     "browserstack.localIdentifier": timeStamp,
     os: "OS X",
@@ -27,44 +37,9 @@ var overrides = {
     browserName: 'Chrome',
     browser_version: "latest",
     acceptInsecureCerts: true,
-    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+    // name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name', //To set a custom test name
     build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().getTime()
   }],
-  onPrepare: function (config, capabilities) {
-    console.log("Connecting local");
-    return new Promise(function (resolve, reject) {
-      exports.bs_local = new browserstack.Local();
-      exports.bs_local.start({ 'key': exports.config.key, 'localIdentifier': timeStamp }, function (error) {
-        if (error) return reject(error);
-
-        console.log('Connected. Now testing...');
-        resolve();
-      });
-    });
-  },
-  onComplete: function (capabilties, specs) {
-    return new Promise(function(resolve, reject){
-      exports.bs_local.stop(function() {
-        console.log("Binary stopped");
-        resolve();
-      });
-    });
-  },
-  afterTest: function (test, context, { error, result, duration, passed, retries }) {
-    if((require('minimist')(process.argv.slice(2)))['bstack-session-name']) {
-      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" +
-        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] +  "\" }}");
-    } else {
-      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +  "\" }}");
-    }
-
-    if(passed) {
-      browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
-    } else {
-      browser.takeScreenshot();
-      browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}');
-    }
-  }
 }
 
 exports.config = _.defaultsDeep(overrides, defaults.config);

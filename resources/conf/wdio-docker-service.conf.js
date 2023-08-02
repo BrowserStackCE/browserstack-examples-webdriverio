@@ -5,7 +5,18 @@ var overrides = {
   specs: [
     './src/test/suites/e2e/e2e.spec.js'
   ],
-  services: ['docker'],
+  services: ['docker',
+  ['browserstack', {
+    testObservability: true,
+    testObservabilityOptions: {
+        user: process.env.BROWSERSTACK_USERNAME,
+        key: process.env.BROWSERSTACK_ACCESS_KEY,
+        projectName: 'browserstack-examples-webdriverio',
+        buildName: 'browserstack-examples-webdriverio build',
+        buildTag: 'WDIO'
+    },
+  }]
+  ],
   dockerOptions: {
     image: 'selenium/standalone-chrome',
     healthCheck: 'http://localhost:4444',

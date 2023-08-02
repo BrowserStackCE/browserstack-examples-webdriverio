@@ -19,8 +19,14 @@ var overrides = {
         [
             'browserstack',
             {
-                browserstackLocal: true,
-                opts: {
+              testObservability: true,
+              browserstackLocal: true,
+              testObservabilityOptions: {
+                  'projectName': 'browserstack-examples-webdriverio',
+                  'buildName': 'browserstack-examples-webdriverio build',
+                  'buildTag': 'WDIO'
+              },
+              opts: {
                     forcelocal: false,
                     localIdentifier: timeStamp,
                 }

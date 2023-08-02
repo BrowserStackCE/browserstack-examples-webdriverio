@@ -10,7 +10,20 @@ var overrides = {
     './src/test/suites/e2e/*.js',
     './src/test/suites/user/*.js',
     './src/test/suites/accessibility/*.js'
-  ],
+  ], 
+  services: [
+  ['browserstack', {
+      testObservability: true,
+      testObservabilityOptions: {
+          user: process.env.BROWSERSTACK_USERNAME,
+          key: process.env.BROWSERSTACK_ACCESS_KEY,
+          projectName: 'browserstack-examples-webdriverio',
+          buildName: 'browserstack-examples-webdriverio build',
+          buildTag: 'WDIO'
+      },
+  }]
+],
+  
   capabilities: [{
     maxInstances: 5
   }],

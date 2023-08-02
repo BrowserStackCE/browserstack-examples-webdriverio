@@ -7,7 +7,16 @@ var overrides = {
   specs: [
     './src/test/suites/e2e/e2e.spec.js'
   ],
-  services: [['browserstack']],
+  services: [
+    ['browserstack', {
+        testObservability: true,
+        testObservabilityOptions: {
+            'projectName': 'browserstack-examples-webdriverio',
+            'buildName': 'browserstack-examples-webdriverio build',
+            'buildTag': 'WDIO'
+        },
+    }]
+],
   capabilities: [{
     maxInstances: 1,
     'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',

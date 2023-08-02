@@ -12,7 +12,16 @@ var overrides = {
     './src/test/suites/user/*.js',
     './src/test/suites/accessibility/*.js'
   ],
-  services: [['browserstack']],
+  services: [
+    ['browserstack', {
+        testObservability: true,
+        testObservabilityOptions: {
+            'projectName': 'browserstack-examples-webdriverio',
+            'buildName': 'browserstack-examples-webdriverio build',
+            'buildTag': 'WDIO'
+        },
+    }]
+],
   commonCapabilities: {
     'browserstack.debug': true,
     'browserstack.video': true,

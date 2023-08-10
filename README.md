@@ -373,7 +373,7 @@ You can learn more about [what the product has to offer and why you should be us
 
 Please add the following code snippet to your **wdio.conf.js**.
 
-```json
+```js
 services: [
         ['browserstack', {
             testObservability: true,

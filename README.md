@@ -371,6 +371,20 @@ With Test Observability, you can not only complete your run verification in minu
 
 You can learn more about [what the product has to offer and why you should be using it](https://www.browserstack.com/docs/test-observability/overview/what-is-test-observability).
 
+Please add the following code snippet to your **wdio.conf.js**.
+
+```json
+services: [
+        ['browserstack', {
+            testObservability: true,
+            testObservabilityOptions: {
+                'projectName': 'Specify your project name here. It should not be dynamic',
+                'buildName': 'Specify your job name here. For e.g. `Nightly regression`. It should not be dynamic',
+                'buildTag': 'Any build tag goes here. For e.g. commit message'
+            },
+        }]
+    ],
+```
 To get started with the Test Observability integration with your WebdriverIO Project, please refer to this [documentation](https://www.browserstack.com/docs/test-observability/quick-start/webdriverio).
 
 ## Additional Resources

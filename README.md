@@ -372,7 +372,6 @@ With Test Observability, you can not only complete your run verification in minu
 You can learn more about [what the product has to offer and why you should be using it](https://www.browserstack.com/docs/test-observability/overview/what-is-test-observability).
 
 Please add the following code snippet to your **wdio.conf.js**.
-
 ```js
 services: [
         ['browserstack', {

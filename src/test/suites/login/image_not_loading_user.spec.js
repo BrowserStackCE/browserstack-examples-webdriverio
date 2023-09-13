@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const expectChai = require('chai').expect;
+const accounts = require('../../../../resources/data/user.json')
 
 describe('StackDemo login', () => {
 
@@ -11,13 +12,13 @@ describe('StackDemo login', () => {
       browser.execute(() => sessionStorage.clear())
     })
 
-    it(`Login should be successful for account with username 'image_not_loading_user'`, function() {
-        $('#signin').click();
-        $('#username input').setValue(browser.config.accounts[2].username + '\n');
-        $('#password input').setValue(browser.config.accounts[2].password + '\n');
-        $('#login-btn').click();
+    it(`Login should be successful for account with username 'image_not_loading_user'`, async function() {
+      await $('#signin').click();
+      await $('#username input').setValue(accounts[2].username + '\n');
+      await $('#password input').setValue(accounts[2].password + '\n');
+      await $('#login-btn').click();
 
-        expect($('.username')).toHaveText(browser.config.accounts[2].username);
-        $('#logout').click();
+        expect($('.username')).toHaveText(accounts[2].username);
+        await $('#logout').click();
     });
 })

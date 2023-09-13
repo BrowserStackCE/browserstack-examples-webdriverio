@@ -11,10 +11,10 @@ describe('StackDemo filters', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('Apply vendor filter', () => {
-    $("input[value='Apple'] + span").click();
-    browser.pause(5000)                                               // Example for static wait
-    all_phones = $$(".shelf-item__title").map(function(element){
+  it('Apply vendor filter', async () => {
+    await $("input[value='Apple'] + span").click();
+    await browser.pause(5000)                                               // Example for static wait
+    all_phones = await $$(".shelf-item__title").map(function(element){
       return element.getText()
     });
     expectChai(_.every(all_phones,  function (value) {

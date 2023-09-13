@@ -9,14 +9,15 @@ class OrdersPage extends Page {
    */
   get allOrders() {
     return $$('.order')
+    
   }
 
   get firstOrder() {
     return $('.order')
   }
 
-  waitforOrdersToDisplay() {
-    this.firstOrder.waitForDisplayed({ timeout: 5000 });
+  async waitforOrdersToDisplay() {
+    await this.firstOrder.waitForDisplayed({ timeout: 5000 });
   }
 }
 

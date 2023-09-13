@@ -5,12 +5,12 @@ var overrides = {
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
   specs: [
-    './src/test/suites/login/*.js',
-    './src/test/suites/offers/*.js',
-    './src/test/suites/product/*.js',
-    './src/test/suites/e2e/*.js',
-    './src/test/suites/user/*.js',
-    './src/test/suites/accessibility/*.js'
+    '../../src/test/suites/login/*.js',
+    '../../src/test/suites/offers/*.js',
+    '../../src/test/suites/product/*.js',
+    '../../src/test/suites/e2e/*.js',
+    '../../src/test/suites/user/*.js',
+    '../../src/test/suites/accessibility/*.js'
   ],
   services: [
     ['browserstack', {

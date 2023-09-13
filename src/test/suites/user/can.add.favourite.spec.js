@@ -1,6 +1,8 @@
 const _ = require('lodash');
 const expectChai = require('chai').expect;
 
+const accounts = require('../../../../resources/data/user.json')
+
 describe('StackDemo user suite', () => {
 
   beforeEach('Open StackDemo', () => {
@@ -11,22 +13,22 @@ describe('StackDemo user suite', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('Logged in user should be able to add favourite', () => {
-    $('#signin').click();
-    $('#username input').setValue(browser.config.accounts[3].username + '\n');
-    $('#password input').setValue(browser.config.accounts[3].password + '\n');
-    $('#login-btn').click();
+  it('Logged in user should be able to add favourite', async() => {
+    await $('#signin').click();
+    await $('#username input').setValue(accounts[3].username + '\n');
+    await $('#password input').setValue(accounts[3].password + '\n');
+    await $('#login-btn').click();
 
-    $("//p[text() = 'iPhone 12']/../div/button").waitForDisplayed({ timeout: 5000 });
-    $("//p[text() = 'iPhone 12']/../div/button").click();
+    await $("//p[text() = 'iPhone 12']/../div/button").waitForDisplayed({ timeout: 5000 });
+    await $("//p[text() = 'iPhone 12']/../div/button").click();
 
-    $('#favourites').click();
+    await $('#favourites').click();
 
-    browser.waitUntil(() => {
-      let pageUrl = browser.getUrl();
+    await browser.waitUntil(async () => {
+      let pageUrl = await browser.getUrl();
       return pageUrl.indexOf('favourites') > -1
     }, 5000)
-    browser.pause(5000)
-    expect($$('p.shelf-item__title')).toHaveTextContaining('iPhone 12');
+    await browser.pause(5000)
+    expect(await $$('p.shelf-item__title')).toHaveTextContaining('iPhone 12');
   })
 })

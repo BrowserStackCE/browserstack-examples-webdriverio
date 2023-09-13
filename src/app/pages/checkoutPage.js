@@ -30,28 +30,28 @@ class CheckoutPage extends Page {
     return $('#checkout-shipping-continue')
   }
 
-  enterFirstName(firstName) {
-    this.firstNameInput.setValue(firstName);
+  async enterFirstName(firstName) {
+    await this.firstNameInput.setValue(firstName);
   }
 
-  enterLastName(lastName) {
-    this.lastNameInput.setValue(lastName);
+  async enterLastName(lastName) {
+    await this.lastNameInput.setValue(lastName);
   }
 
-  enterAddressLine1(addressLine1) {
-    this.addressLine1Input.setValue(addressLine1);
+  async enterAddressLine1(addressLine1) {
+    await this.addressLine1Input.setValue(addressLine1);
   }
 
-  enterProvince(province) {
-    this.provinceInput.setValue(province);
+  async enterProvince(province) {
+    await this.provinceInput.setValue(province);
   }
 
-  enterPostCode(postCode) {
-    this.postCodeInput.setValue(postCode);
+  async enterPostCode(postCode) {
+    await this.postCodeInput.setValue(postCode);
   }
 
-  clickSubmit() {
-    this.checkoutShippingContinue.click();
+  async clickSubmit() {
+    await this.checkoutShippingContinue.click();
   }
 
   open() {

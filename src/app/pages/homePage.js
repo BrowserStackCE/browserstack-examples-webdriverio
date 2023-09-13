@@ -36,26 +36,26 @@ class HomePage extends Page {
     return $('.buy-btn')
   }
 
-  navigateToSignIn() {
-    this.signInLink.click();
+  async navigateToSignIn() {
+    await this.signInLink.click();
   }
 
-  navigateToOrders() {
-    this.ordersLink.click();
+  async navigateToOrders() {
+    await this.ordersLink.click();
   }
 
-  selectPhone(phoneToSelect) {
+  async selectPhone(phoneToSelect) {
     phoneName = phoneToSelect;
-    this.phonesBuyButton.click();
+    await this.phonesBuyButton.click();
   }
 
-  closeCartModal() {
-    this.cartCloseButton.click();
+  async closeCartModal() {
+    await this.cartCloseButton.click();
   }
 
-  clickBuyButton() {
-    this.buyButton.waitForClickable({ timeout: 5000 });
-    this.buyButton.click();
+  async clickBuyButton() {
+    await this.buyButton.waitForClickable({ timeout: 5000 });
+    await this.buyButton.click();
   }
 
   open() {

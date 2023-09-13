@@ -18,21 +18,21 @@ class ConfirmationPage extends Page {
     return $('#downloadpdf');
   }
 
-  clickContinueShoppingButton() {
-    this.continueShoppingButton.click();
+  async clickContinueShoppingButton() {
+    await this.continueShoppingButton.click();
   }
 
-  waitForConfirmationToBeDisplayed() {
-    this.confirmationMessage.waitForDisplayed({ timeout: 5000 });
+  async waitForConfirmationToBeDisplayed() {
+    await this.confirmationMessage.waitForDisplayed({ timeout: 5000 });
   }
 
-  clickDownloadPdf() {
-    this.downloadPDFLink.click();
+  async clickDownloadPdf() {
+    await this.downloadPDFLink.click();
   }
 
-  downloadedFileExists(browser, fileName) {
-    browser.pause(2000);
-    const fileExists = browser.executeScript('browserstack_executor: {"action": "fileExists", "arguments": {"fileName": "'+ fileName + '"}}');
+  async downloadedFileExists(browser, fileName) {
+    await browser.pause(2000);
+    const fileExists = await browser.execute('browserstack_executor: {"action": "fileExists", "arguments": {"fileName": "'+ fileName + '"}}');
     expect(fileExists).toEqual(true);
   }
 

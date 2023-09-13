@@ -5,7 +5,7 @@ var overrides = {
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
   specs: [
-    './src/test/suites/e2e/e2e.spec.js'
+    '../../src/test/suites/e2e/e2e.spec.js'
   ],
   services: [
     ['browserstack', {

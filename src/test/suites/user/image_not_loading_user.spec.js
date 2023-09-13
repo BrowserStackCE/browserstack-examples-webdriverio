@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const expectChai = require('chai').expect;
+const accounts = require('../../../../resources/data/user.json')
 
 describe('StackDemo user suite', () => {
 
@@ -11,14 +12,14 @@ describe('StackDemo user suite', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('All product images should load for user', () => {
-    $('#signin').click();
-    $('#username input').setValue(browser.config.accounts[2].username + '\n');
-    $('#password input').setValue(browser.config.accounts[2].password + '\n');
-    $('#login-btn').click();
+  it('All product images should load for user', async () => {
+    await $('#signin').click();
+    await $('#username input').setValue(accounts[2].username + '\n');
+    await $('#password input').setValue(accounts[2].password + '\n');
+    await $('#login-btn').click();
     expect($('.username')).toHaveText('image_not_loading_user');
 
-    all_images = $$("div.shelf-item__thumb img").map(function(element){
+    all_images = await $$("div.shelf-item__thumb img").map(function(element){
       return element.getAttribute("src")
     });
 

@@ -1,3 +1,4 @@
+const accounts = require('../../../../resources/data/user.json')
 describe('StackDemo login', () => {
 
   beforeEach('Open StackDemo', () => {
@@ -8,11 +9,11 @@ describe('StackDemo login', () => {
     browser.execute(() => sessionStorage.clear())
   })
 
-  it('Navigated to login on clicking favourites Nav Item', () => {
-    $('#favourites').click();
+  it('Navigated to login on clicking favourites Nav Item', async () => {
+    await $('#favourites').click();
     
-    browser.waitUntil(() => {
-      let pageUrl = browser.getUrl();
+    await browser.waitUntil(async () => {
+      let pageUrl = await browser.getUrl();
       return pageUrl.indexOf('signin?favourites=true') > -1
     }, 5000)
   })

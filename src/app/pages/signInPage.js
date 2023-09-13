@@ -23,10 +23,10 @@ class SignInPage extends Page {
     return $('.username')
   }
 
-  login(username, password) {
-    this.inputUsername.setValue(username + '\n');
-    this.inputPassword.setValue(password + '\n');
-    this.btnSubmit.click();
+  async login(username, password) {
+    await this.inputUsername.setValue(username + '\n');
+    await this.inputPassword.setValue(password + '\n');
+    await this.btnSubmit.click();
   }
 
   getSignedInUsername() {

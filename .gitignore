@@ -4,4 +4,3 @@ allure-report/
 allure-results/
 local.log
 .DS_Store
-package-lock.json
